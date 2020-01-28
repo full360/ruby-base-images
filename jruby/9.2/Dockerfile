@@ -41,8 +41,7 @@ ENV PATH $BUNDLE_BIN:$PATH
 RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
     && chmod 777 "$GEM_HOME" "$BUNDLE_BIN"
 
-LABEL build.publish.majorversion="9"
-LABEL build.publish.minorversion="9.2"
+LABEL build.publish.majorversion="9.2"
 LABEL build.publish.imagebase="jre-alpine"
 
 ENV ENVELOPE_VERSION 0.3.2

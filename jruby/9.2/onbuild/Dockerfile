@@ -1,7 +1,6 @@
 FROM full360/jruby:9.2-jre-alpine
 
-LABEL build.publish.majorversion="9"
-LABEL build.publish.minorversion="9.2"
+LABEL build.publish.majorversion="9.2"
 LABEL build.publish.imagebase="jre-alpine-onbuild"
 
 ENV RACK_ENV production

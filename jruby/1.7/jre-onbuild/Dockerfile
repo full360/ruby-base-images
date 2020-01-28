@@ -1,7 +1,6 @@
 FROM full360/jruby:1.7-jre
 
-LABEL build.publish.majorversion="1"
-LABEL build.publish.minorversion="1.7"
+LABEL build.publish.majorversion="1.7"
 LABEL build.publish.imagebase="jre-onbuild"
 
 ENV RACK_ENV production
