@@ -1,3 +1,13 @@
 #!/bin/bash
 make clean
+
+export EXCLUDE_DOCKERDIR=onbuild
 make build-${DOCKER_REPO##*/}
+make tag-${DOCKER_REPO##*/}
+make push-${DOCKER_REPO##*/}
+unset EXCLUDE_DOCKERDIR
+
+export INCLUDE_DOCKERDIR=onbuild
+# pick up cached builds from above
+make build-${DOCKER_REPO##*/}
+unset INCLUDE_DOCKERDIR

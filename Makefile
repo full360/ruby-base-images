@@ -1,8 +1,6 @@
 REGISTRY_NAMESPACE ?= full360
 REGISTRY ?= index.docker.io
 DOCKER_CI_REPO ?= $(REGISTRY)/$(REGISTRY_NAMESPACE)
-USECACHE = true
-DRYRUN = true
 
 DOCKERMK := $(shell if command -v curl >/dev/null; then \
 		if [ ! -e docker-ci.mk ]; then \
