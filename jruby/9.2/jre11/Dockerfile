@@ -10,7 +10,6 @@ RUN apk add --no-cache \
   unzip \
   ca-certificates \
   gnupg \
-  nodejs-lts \
   && mkdir -p /root/.gnupg \
   && echo "allow-loopback-pinentry" >> /root/.gnupg/gpg-agent.conf \
   && echo "pinentry-mode loopback" >> /root/.gnupg/gpg.conf \
