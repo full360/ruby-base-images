@@ -2,23 +2,127 @@ name: GitHub CI
 
 on:
   push:
-  pull_request:
+    branches:
+      - master
   schedule:
     - cron: 0 0 * * 0
 
 jobs:
   build-base:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dockerfile:
-          - ruby/2.6/alpine/Dockerfile
-          - jruby/1.7/jre/Dockerfile
-          - jruby/9.1/alpine-jre/Dockerfile
-          - jruby/9.2/jre8/Dockerfile
-          - jruby/9.2/jre11/Dockerfile
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build base
-      run: docker build -< ${{ matrix.dockerfile }}
+    - name: Build Ruby 2.6
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: ruby
+        dockerfile: 2.6/alpine/Dockerfile
+        always_pull: true
+        repository: full360/ruby
+        tags: latest,2-alpine,2.6-alpine
+
+    - name: Build JRuby 1.7 JRE7
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby
+        dockerfile: 1.7/jre/Dockerfile
+        always_pull: true
+        repository: full360/jruby
+        tags: 1.7-jre,1.7-jre7
+
+    - name: Build JRuby 9.1 JRE8
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby
+        dockerfile: 9.1/alpine-jre/Dockerfile
+        always_pull: true
+        repository: full360/jruby
+        tags: 9.1-jre-alpine,9.1-jre8-alpine
+
+    - name: Build JRuby 9.2 JRE8
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby
+        dockerfile: 9.2/jre8/Dockerfile
+        always_pull: true
+        repository: full360/jruby
+        tags: 9-jre8,9.2-jre8
+
+    - name: Build JRuby 9.2 JRE11
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby
+        dockerfile: 9.2/jre11/Dockerfile
+        always_pull: true
+        repository: full360/jruby
+        tags: latest,9-jre11,9.2-jre11
+
+  build-onbuild:
+    needs: build-base
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build Ruby 2.6 onbuild
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: ruby
+        dockerfile: 2.6/alpine/onbuild/Dockerfile
+        always_pull: true
+        repository: full360/ruby
+        tags: 2-alpine-onbuild,2.6-alpine-onbuild
+
+    - name: Build JRuby 1.7 JRE7 onbuild
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby
+        dockerfile: 1.7/jre-onbuild/Dockerfile
+        always_pull: true
+        repository: full360/jruby
+        tags: 1.7-jre-onbuild,1.7-jre7-onbuild
+
+    - name: Build JRuby 9.1 JRE8 onbuild
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby
+        dockerfile: 9.1/alpine-jre-onbuild/Dockerfile
+        always_pull: true
+        repository: full360/jruby
+        tags: 9.1-jre-alpine-onbuild,9.1-jre8-alpine-onbuild
+
+    - name: Build JRuby 9.2 JRE8 onbuild
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby
+        dockerfile: 9.2/jre8/onbuild/Dockerfile
+        always_pull: true
+        repository: full360/jruby
+        tags: 9-jre8-onbuild,9.2-jre8-onbuild
+
+    - name: Build JRuby 9.2 JRE11 onbuild
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby
+        dockerfile: 9.2/jre11/onbuild/Dockerfile
+        always_pull: true
+        repository: full360/jruby
+        tags: 9-jre11-onbuild,9.2-jre11-onbuild
