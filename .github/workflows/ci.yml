@@ -70,8 +70,6 @@ jobs:
         always_pull: true
         repository: full360/jruby
         tags: 9.1-jre-alpine,9.1-jre8-alpine
-    - name: Checkout
-      uses: actions/checkout@v2
     - name: Build onbuild
       uses: docker/build-push-action@v1
       with:
