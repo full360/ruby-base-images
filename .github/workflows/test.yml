@@ -12,13 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
     - name: Build Ruby 2.6
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: ruby
-        dockerfile: 2.6/alpine/Dockerfile
+        path: ruby/2.6/alpine
         always_pull: true
         repository: full360/ruby
         tags: latest,2-alpine,2.6-alpine
@@ -28,8 +30,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby
-        dockerfile: 1.7/jre/Dockerfile
+        path: jruby/1.7/jre
         always_pull: true
         repository: full360/jruby
         tags: 1.7-jre,1.7-jre7
@@ -39,8 +40,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby
-        dockerfile: 9.1/alpine-jre/Dockerfile
+        path: jruby/9.1/alpine-jre
         always_pull: true
         repository: full360/jruby
         tags: 9.1-jre-alpine,9.1-jre8-alpine
@@ -50,8 +50,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby
-        dockerfile: 9.2/jre8/Dockerfile
+        path: jruby/9.2/jre8
         always_pull: true
         repository: full360/jruby
         tags: 9-jre8,9.2-jre8
@@ -61,8 +60,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby
-        dockerfile: 9.2/jre11/Dockerfile
+        path: jruby/9.2/jre11
         always_pull: true
         repository: full360/jruby
         tags: latest,9-jre11,9.2-jre11
@@ -72,13 +70,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
     - name: Build Ruby 2.6 onbuild
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: ruby
-        dockerfile: 2.6/alpine/onbuild/Dockerfile
+        path: ruby/2.6/alpine/onbuild
         always_pull: true
         repository: full360/ruby
         tags: 2-alpine-onbuild,2.6-alpine-onbuild
@@ -88,8 +88,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby
-        dockerfile: 1.7/jre-onbuild/Dockerfile
+        path: jruby/1.7/jre-onbuild
         always_pull: true
         repository: full360/jruby
         tags: 1.7-jre-onbuild,1.7-jre7-onbuild
@@ -99,8 +98,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby
-        dockerfile: 9.1/alpine-jre-onbuild/Dockerfile
+        path: jruby/9.1/alpine-jre-onbuild
         always_pull: true
         repository: full360/jruby
         tags: 9.1-jre-alpine-onbuild,9.1-jre8-alpine-onbuild
@@ -110,8 +108,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby
-        dockerfile: 9.2/jre8/onbuild/Dockerfile
+        path: jruby/9.2/jre8/onbuild
         always_pull: true
         repository: full360/jruby
         tags: 9-jre8-onbuild,9.2-jre8-onbuild
@@ -121,8 +118,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby
-        dockerfile: 9.2/jre11/onbuild/Dockerfile
+        path: jruby/9.2/jre11/onbuild
         always_pull: true
         repository: full360/jruby
         tags: 9-jre11-onbuild,9.2-jre11-onbuild
