@@ -11,7 +11,7 @@ RUN apt-get update \
   unzip \
   ca-certificates \
   gnupg \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /root/.gnupg \
   && echo "allow-loopback-pinentry" >> /root/.gnupg/gpg-agent.conf \
   && echo "pinentry-mode loopback" >> /root/.gnupg/gpg.conf \
