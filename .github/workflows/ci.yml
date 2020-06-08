@@ -8,14 +8,12 @@ on:
     - cron: 0 0 * * 0
 
 jobs:
-  build-base:
+  ruby-26:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Build Ruby 2.6
+    - name: Build
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -24,56 +22,7 @@ jobs:
         always_pull: true
         repository: full360/ruby
         tags: latest,2-alpine,2.6-alpine
-
-    - name: Build JRuby 1.7 JRE7
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/1.7/jre
-        always_pull: true
-        repository: full360/jruby
-        tags: 1.7-jre,1.7-jre7
-
-    - name: Build JRuby 9.1 JRE8
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.1/alpine-jre
-        always_pull: true
-        repository: full360/jruby
-        tags: 9.1-jre-alpine,9.1-jre8-alpine
-
-    - name: Build JRuby 9.2 JRE8
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.2/jre8
-        always_pull: true
-        repository: full360/jruby
-        tags: 9-jre8,9.2-jre8
-
-    - name: Build JRuby 9.2 JRE11
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.2/jre11
-        always_pull: true
-        repository: full360/jruby
-        tags: latest,9-jre11,9.2-jre11
-
-  build-onbuild:
-    needs: build-base
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Build Ruby 2.6 onbuild
+    - name: Build onbuild
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -83,7 +32,21 @@ jobs:
         repository: full360/ruby
         tags: 2-alpine-onbuild,2.6-alpine-onbuild
 
-    - name: Build JRuby 1.7 JRE7 onbuild
+  jruby-17:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby/1.7/jre
+        always_pull: true
+        repository: full360/jruby
+        tags: 1.7-jre,1.7-jre7
+    - name: Build onbuild
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -93,7 +56,23 @@ jobs:
         repository: full360/jruby
         tags: 1.7-jre-onbuild,1.7-jre7-onbuild
 
-    - name: Build JRuby 9.1 JRE8 onbuild
+  jruby-91-alpine:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby/9.1/alpine-jre
+        always_pull: true
+        repository: full360/jruby
+        tags: 9.1-jre-alpine,9.1-jre8-alpine
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build onbuild
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -103,7 +82,20 @@ jobs:
         repository: full360/jruby
         tags: 9.1-jre-alpine-onbuild,9.1-jre8-alpine-onbuild
 
-    - name: Build JRuby 9.2 JRE8 onbuild
+  jruby-92-jre8:
+    runs-on: ubuntu-latest
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby/9.2/jre8
+        always_pull: true
+        repository: full360/jruby
+        tags: 9-jre8,9.2-jre8
+    - name: Build onbuild
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -113,7 +105,20 @@ jobs:
         repository: full360/jruby
         tags: 9-jre8-onbuild,9.2-jre8-onbuild
 
-    - name: Build JRuby 9.2 JRE11 onbuild
+  jruby-92-jre11:
+    runs-on: ubuntu-latest
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        path: jruby/9.2/jre11
+        always_pull: true
+        repository: full360/jruby
+        tags: latest,9-jre11,9.2-jre11
+    - name: Build onbuild
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
