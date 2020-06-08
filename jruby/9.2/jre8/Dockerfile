@@ -6,10 +6,12 @@ LABEL build.publish.imagebase="jre8"
 ENV ENVELOPE_VERSION 0.3.2
 
 # Install dependencies including f360 certs and envelope
-RUN apk add --no-cache \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
   unzip \
   ca-certificates \
   gnupg \
+  && rm -rf /var/lib/apt/lists/*
   && mkdir -p /root/.gnupg \
   && echo "allow-loopback-pinentry" >> /root/.gnupg/gpg-agent.conf \
   && echo "pinentry-mode loopback" >> /root/.gnupg/gpg.conf \
