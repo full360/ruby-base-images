@@ -1,0 +1,29 @@
+name: GitHub CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: 0 0 * * 0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dockerfile:
+          - ruby/2.6/alpine/Dockerfile
+          - ruby/2.6/alpine/onbuild/Dockerfile
+          - jruby/1.7/jre/Dockerfile
+          - jruby/1.7/jre-onbuild/Dockerfile
+          - jruby/9.1/alpine-jre/Dockerfile
+          - jruby/9.1/alpine-jre-onbuild/Dockerfile
+          - jruby/9.2/jre8/Dockerfile
+          - jruby/9.2/jre8/onbuild/Dockerfile
+          - jruby/9.2/jre11/Dockerfile
+          - jruby/9.2/jre11/onbuild/Dockerfile
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: docker build -< ${{ matrix.dockerfile }}
