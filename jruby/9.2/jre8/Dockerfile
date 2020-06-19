@@ -3,7 +3,7 @@ FROM jruby:9.2-jre8
 LABEL build.publish.majorversion="9.2"
 LABEL build.publish.imagebase="jre8"
 
-ENV ENVELOPE_VERSION 0.3.2
+ENV ENVELOPE_VERSION 0.3.3
 
 # Install dependencies including f360 certs and envelope
 RUN apt-get update \
