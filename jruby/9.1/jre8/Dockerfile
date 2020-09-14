@@ -1,7 +1,7 @@
 FROM jruby:9.1-jre-alpine
 
 LABEL build.publish.minorversion="9.1"
-LABEL build.publish.imagebase="jre-alpine"
+LABEL build.publish.imagebase="jre8-alpine"
 
 ENV ENVELOPE_VERSION 0.3.3
 
