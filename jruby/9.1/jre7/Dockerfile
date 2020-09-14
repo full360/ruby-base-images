@@ -51,10 +51,12 @@ ENV ENVELOPE_VERSION 0.3.3
 
 # Install dependencies including f360 certs and envelope
 RUN apk add --no-cache \
+     bash \
+     curl \
+     tar \
      unzip \
      ca-certificates \
      gnupg \
-     nodejs-lts \
      && mkdir -p /root/.gnupg \
      && echo "allow-loopback-pinentry" >> /root/.gnupg/gpg-agent.conf \
      && echo "pinentry-mode loopback" >> /root/.gnupg/gpg.conf \
