@@ -25,7 +25,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.1/alpine-jre
+        path: jruby/9.1/jre8
         always_pull: true
         repository: full360/jruby
         tags: 9.1-jre-alpine,9.1-jre8-alpine
@@ -35,7 +35,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.1/alpine-jre-onbuild
+        path: jruby/9.1/jre8/onbuild
         always_pull: true
         repository: full360/jruby
         tags: 9.1-jre-alpine-onbuild,9.1-jre8-alpine-onbuild
