@@ -1,6 +1,6 @@
 FROM openjdk:7-jre
 
-LABEL build.publish.majorversion="9.1"
+LABEL build.publish.minorversion="9.1"
 LABEL build.publish.imagebase="jre7"
 
 RUN apt-get update && apt-get install -y libc6-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
