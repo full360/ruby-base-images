@@ -28,7 +28,7 @@ jobs:
         path: jruby/9.1/jre7
         always_pull: true
         repository: full360/jruby
-        tags: 9.1-jre7-alpine
+        tags: 9.1-jre7
 
     - name: Build onbuild
       uses: docker/build-push-action@v1
@@ -38,7 +38,7 @@ jobs:
         path: jruby/9.1/jre7/onbuild
         always_pull: true
         repository: full360/jruby
-        tags: 9.1-jre7-alpine-onbuild
+        tags: 9.1-jre7-onbuild
 
   jruby-91-jre8:
     runs-on: ubuntu-latest
