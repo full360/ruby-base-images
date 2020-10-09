@@ -12,16 +12,10 @@ RUN gem install bundler -v "~> 2"
 
 RUN apk add --no-cache \
   bash \
-  build-base \
   curl \
   tar \
   unzip \
   ca-certificates \
-  gnupg \
-  nodejs-lts \
-  && mkdir -p /root/.gnupg \
-  && echo "allow-loopback-pinentry" >> /root/.gnupg/gpg-agent.conf \
-  && echo "pinentry-mode loopback" >> /root/.gnupg/gpg.conf \
   && curl -s -o /usr/local/share/ca-certificates/full360-root-ca.crt \
   https://s3.amazonaws.com/full360-cloudformation-init/public/full360-root-ca.crt \
   && update-ca-certificates \
