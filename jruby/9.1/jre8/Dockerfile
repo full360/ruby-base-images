@@ -12,7 +12,6 @@ RUN apk add --no-cache \
      tar \
      unzip \
      ca-certificates \
-     nodejs-lts \
      && curl -s -o /usr/local/share/ca-certificates/full360-root-ca.crt \
      https://s3.amazonaws.com/full360-cloudformation-init/public/full360-root-ca.crt \
      && update-ca-certificates \
