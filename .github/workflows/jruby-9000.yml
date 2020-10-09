@@ -138,22 +138,34 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.2/jre11
-        always_pull: true
-        repository: full360/jruby
-        tags: latest,9-jre11,9.2-jre11
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-    - name: Build onbuild
-      uses: docker/build-push-action@v1
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.2/jre11/onbuild
-        always_pull: true
-        repository: full360/jruby
-        tags: 9-jre11-onbuild,9.2-jre11-onbuild
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+    - name: Build JRuby 9.2 JRE 11
+      uses: docker/build-push-action@v2
+      with:
+        context: ./jruby/9.2/jre11
+        file: ./jruby/9.2/jre11/Dockerfile
+        pull: true
+        push: true
+        tags: |
+          full360/jruby:latest
+          full360/jruby:9-jre11
+          full360/jruby:9.2-jre11
+
+    - name: Build JRuby 9.2 JRE 11 on-build
+      uses: docker/build-push-action@v2
+      with:
+        context: ./jruby/9.2/jre11/onbuild
+        file: ./jruby/9.2/jre11/onbuild/Dockerfile
+        pull: true
+        push: true
+        tags: |
+          full360/jruby:9-jre11-onbuild
+          full360/jruby:9.2-jre11-onbuild
