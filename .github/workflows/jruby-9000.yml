@@ -20,25 +20,34 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.1/jre7
-        always_pull: true
-        repository: full360/jruby
-        tags: 9.1-jre7
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-    - name: Build onbuild
-      uses: docker/build-push-action@v1
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        path: jruby/9.1/jre7/onbuild
-        always_pull: true
-        repository: full360/jruby
-        tags: 9.1-jre7-onbuild
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+    - name: Build JRuby 9.1 JRE 7
+      uses: docker/build-push-action@v2
+      with:
+        context: ./jruby/9.1/jre7
+        file: ./jruby/9.1/jre7/Dockerfile
+        pull: true
+        push: true
+        tags: |
+          full360/jruby:9.1-jre7
+
+    - name: Build JRuby 9.1 JRE 7 on-build
+      uses: docker/build-push-action@v2
+      with:
+        context: ./jruby/9.1/jre7/onbuild
+        file: ./jruby/9.1/jre7/onbuild/Dockerfile
+        pull: true
+        push: true
+        tags: |
+          full360/jruby:9.1-jre7
 
   jruby-91-jre8:
     runs-on: ubuntu-latest
