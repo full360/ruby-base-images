@@ -5,7 +5,7 @@ LABEL build.publish.minorversion="2.6"
 LABEL build.publish.imagebase="alpine"
 
 # Install dependencies including f360 certs and envelope
-ENV ENVELOPE_VERSION 0.3.3
+ENV ENVELOPE_VERSION 0.4.0
 ENV LANG en_US.UTF-8
 
 RUN gem install bundler -v "~> 2"

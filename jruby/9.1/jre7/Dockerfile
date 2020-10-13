@@ -37,7 +37,7 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 
 CMD [ "irb" ]
 
-ENV ENVELOPE_VERSION 0.3.3
+ENV ENVELOPE_VERSION 0.4.0
 
 # Install dependencies including f360 certs and envelope
 RUN apt-get update \

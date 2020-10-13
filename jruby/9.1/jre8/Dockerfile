@@ -3,7 +3,7 @@ FROM jruby:9.1-jre-alpine
 LABEL build.publish.minorversion="9.1"
 LABEL build.publish.imagebase="jre8-alpine"
 
-ENV ENVELOPE_VERSION 0.3.3
+ENV ENVELOPE_VERSION 0.4.0
 
 # Install dependencies including f360 certs and envelope
 RUN apk add --no-cache \

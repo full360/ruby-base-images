@@ -3,7 +3,7 @@ FROM openjdk:7-jre
 LABEL build.publish.majorversion="1.7"
 LABEL build.publish.imagebase="jre"
 
-ENV ENVELOPE_VERSION 0.3.3
+ENV ENVELOPE_VERSION 0.4.0
 
 RUN apt-get update -qq && \
   apt-get install -y --no-install-recommends -qq \
